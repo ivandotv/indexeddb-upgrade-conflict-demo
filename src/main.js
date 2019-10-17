@@ -3,7 +3,7 @@ import "bootstrap/js/dist/modal"
 import "bootstrap/dist/css/bootstrap.min.css"
 import $ from "jquery"
 
-// increase the version and then open the new tab in the same browser
+// to test the demo increase the version and then open the new tab in the same browser
 const version = 1
 const dbName = "testing"
 let db = null
@@ -11,19 +11,21 @@ let db = null
 //status field for appending text
 const statusEl = document.querySelector("#status")
 
-appendToStatus("Init app")
-appendToStatus("Open Database")
+writeStatus("Init app")
+writeStatus("Open Database")
+
+// open the connection to the database
 let openRequest = indexedDB.open(dbName, version)
 
 openRequest.onsuccess = function(event) {
   // store the result of opening the database in the db variable.
   db = openRequest.result
-  appendToStatus("Database opened.")
-  appendToStatus(`Database version: ${db.version}`)
+  writeStatus("Database opened.")
+  writeStatus(`Database version: ${db.version}`)
 
-  // handle database version change
+  // add listener to handle database version change
   db.onversionchange = function() {
-    appendToStatus("Database is outdated, please reload the page.")
+    writeStatus("Database is outdated, please reload the page.")
 
     //!important when version change is detected close database immediately
     db.close()
@@ -35,24 +37,25 @@ openRequest.onsuccess = function(event) {
 openRequest.onerror = function(event) {
   console.log(`on error`)
 
-  appendToStatus("Error loading database.")
+  writeStatus("Error loading database.")
 }
 
 openRequest.onblocked = function() {
   // there's another open connection to the same database
   // and it hasn't been closed after db.onversionchange was triggered
-  appendToStatus("Database upgrade blocked")
+  writeStatus("Database upgrade blocked")
   launchPopup($closeOtherTabsPopupContent)
 }
 
 openRequest.onupgradeneeded = function() {
-  // triggers if the client has no database - first time on the site
-  // or database has been deleted via browser developer tools
+  // triggers if the client has no database (first time on the site)
+  // OR database has been deleted via browser developer tools
+  // OR new version of the database is being used
 
-  // modify - create object stores here
+  // create your new object schema here
   // db.createObjectStore('todos', {keyPath: 'id'});
 
-  appendToStatus("Upgrading database")
+  writeStatus("Upgrading database")
 }
 
 //launch notification modal
@@ -68,7 +71,7 @@ function launchPopup(contentEl) {
 }
 
 // helper function for writing to dom nodes
-function appendToStatus(data) {
+function writeStatus(data) {
   statusEl.innerHTML += `<li>${data}</li>`
   console.log(data)
 }
