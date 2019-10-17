@@ -23,13 +23,14 @@ openRequest.onsuccess = function(event) {
   writeStatus("Database opened.")
   writeStatus(`Database version: ${db.version}`)
 
-  // add listener to handle database version change
+  // add listener to handle the database version change
   db.onversionchange = function() {
     writeStatus("Database is outdated, please reload the page.")
 
-    //!important when version change is detected close database immediately
+    //!important when version change is detected close the database immediately
     db.close()
-    // instruct user to reload the page via popup
+    // instruct the user to reload the page via popup
+    // and block any interaction with the site
     launchPopup($newVersionPopupContent)
   }
 }
