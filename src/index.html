@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>IndexedDB update notification demo</title>
+  </head>
+  <body>
+    <ul id="status"></ul>
+    <div id="myModal" class="modal fade" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document"></div>
+    </div>
+
+    <div id="new-version" class="modal-content invisible">
+      <div class="modal-header">
+        <h5 class="modal-title">Attention</h5>
+      </div>
+      <div class="modal-body">
+        <p>
+          New Version of the application has been released.
+        </p>
+        <p>Please reload the window.</p>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          onclick="window.location.reload()"
+          class="btn btn-primary"
+        >
+          Reload
+        </button>
+      </div>
+    </div>
+
+    <div id="close-tab" class="modal-content invisible">
+      <div class="modal-header">
+        <h5 class="modal-title">Attention</h5>
+      </div>
+      <div class="modal-body">
+        <p>
+          Other tabs are using older version of the application.
+        </p>
+        <p>Please reload or close those other tabs.</p>
+      </div>
+      <!-- <div class="modal-footer"></div> -->
+    </div>
+  </body>
+</html>
