@@ -2,9 +2,10 @@ import "./main.css"
 import "bootstrap/js/dist/modal"
 import "bootstrap/dist/css/bootstrap.min.css"
 import $ from "jquery"
-const dbName = "testing"
+
 // increase the version and then open the new tab in the same browser
 const version = 1
+const dbName = "testing"
 let db = null
 
 //status field for appending text
