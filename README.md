@@ -1,7 +1,24 @@
-# IndexedDB upgrade conflic resolution
+# IndexedDB upgrade conflict resolution
 
 This is the repository for my blog post about [title](https:dev.to)
 
-When user has multiple tabs of the same site open, there is a potential for completely ruening the data in the in the indexedDB database if the versions of the DB don't match.
+## Scenario
 
-For the explanation of the solution and instructions how to run the demo please refer to the article.
+When the user has multiple tabs of the same site open, there is a potential for completely ruining the data in the indexedDB database if the versions of the DB don't match.
+
+For a deeper explanation of the problem and for the solution [please refer to the article](https:dev.to)
+
+## Usage
+
+```sh
+npm install
+```
+
+```sh
+npm start
+```
+
+- Open browser to `http://localhost:8080`
+- Open multiple tabs to `http://localhost:8080`
+- Increase `version` variable in the `main.js` file
+- Reload one tab, and watch what happens in other tabs (with the old database)
